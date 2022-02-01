@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
+//import typefaceFont from 'three/examples/fonts/helvetiker_regular.typeface.json'
 
 /**
  * Base
@@ -20,15 +21,44 @@ const scene = new THREE.Scene()
  */
 const textureLoader = new THREE.TextureLoader()
 
+// fonts
+const fontLoader = new THREE.FontLoader()
+fontLoader.load(
+    '/fonts/helvetiker_regular.typeface.json',
+    (font)=>{
+        const textGeometery = new THREE.TextBufferGeometry(
+            'Ayush Jha',{
+                font: font,
+                size:0.5,
+                height:0.2,
+                curveSegments:12,
+                bevelEnabled: true,
+                bevelThickness:0.03,
+                bevelSize:0.02,
+                bevelOffset:0,
+                bevelSegments:5
+            }
+        )
+        textGeometery.computeBoundingBox()
+        console.log(textGeometery.boundingBox)
+        const textMaterial = new THREE.MeshBasicMaterial()
+    const text = new THREE.Mesh(textGeometery,textMaterial)
+    scene.add(text)
+    }
+    
+)
+
+
+
 /**
  * Object
  */
-const cube = new THREE.Mesh(
-    new THREE.BoxBufferGeometry(1, 1, 1),
-    new THREE.MeshBasicMaterial()
-)
+// const cube = new THREE.Mesh(
+//     new THREE.BoxBufferGeometry(1, 1, 1),
+//     new THREE.MeshBasicMaterial()
+// )
 
-scene.add(cube)
+// scene.add(cube)
 
 /**
  * Sizes
